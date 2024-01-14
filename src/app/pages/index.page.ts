@@ -1,49 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import ProjectItemComponent from '../components/project-item/project-item.component';
+
+type Project = {
+  id: number,
+  title: string,
+  description: string,
+  link: string
+}
 
 @Component({
-  selector: 'app-home',
   standalone: true,
-  template: `
-    <div>
-      <a href="https://analogjs.org/" target="_blank">
-        <img alt="Analog Logo" class="logo analog" src="/analog.svg" />
-      </a>
-    </div>
-
-    <h2>Analog</h2>
-
-    <h3>The fullstack meta-framework for Angular!</h3>
-
-    <div class="card">
-      <button type="button" (click)="increment()">Count {{ count }}</button>
-    </div>
-
-    <p class="read-the-docs">
-      For guides on how to customize this project, visit the
-      <a href="https://analogjs.org" target="_blank">Analog documentation</a>
-    </p>
-  `,
-  styles: [
-    `
-      .logo {
-        will-change: filter;
-      }
-      .logo:hover {
-        filter: drop-shadow(0 0 2em #646cffaa);
-      }
-      .logo.angular:hover {
-        filter: drop-shadow(0 0 2em #42b883aa);
-      }
-      .read-the-docs {
-        color: #888;
-      }
-    `,
+  imports: [
+    RouterLink,
+    ProjectItemComponent
   ],
-})
-export default class HomeComponent {
-  count = 0;
+  template: `
+    <div class="page-grid">
+      <div class="page-grid__wrapper">
+        <section class="hero">
+          <article>
+            <h1 class="heading heading--huge">Hello! I’m Andrej, Frontend Developer</h1>
+            <p class="text text--large u-margin-bottom--large">I’m building scaleable web applications. Besides that I’m continuously working on my skills and with curiosity exploring new technologies and approaches.</p>
+            <div>
+              <a routerLink="/about" class="button button--max-width button__primary">
+                About
+                <i class="material-symbols-outlined">arrow_forward</i>
+              </a>
+            </div>
+          </article>
+        </section>
 
-  increment() {
-    this.count++;
+        <section class="u-margin-bottom--huge">
+          <h1 class="heading heading--xlarge">Work</h1>
+          <div class="projects">
+            @for(project of projects(); track project.id) {
+              <app-project-item [project]="project"></app-project-item>
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+  `,
+  styles: `
+    section:not(:last-child) {
+      margin-bottom: 200px;
+    }
+
+    .hero {
+      & article .text {
+        max-width: 600px;
+      }
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+
+      @media screen and (min-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+    }
+  `,
+})
+export default class HomeComponent implements OnInit {
+  protected projects: WritableSignal<Project[]> = signal([]);
+
+  ngOnInit(): void {
+    this.projects.set([
+      { id: 1, title: 'Henkai architekti', description: 'Portfolio website for architects to showcase their projects', link: 'https://henkai.cz' },
+      { id: 2, title: 'Andrej Sipka', description: 'Personal portfolio to promote myself with just one link', link: '' }
+    ]);
   }
 }

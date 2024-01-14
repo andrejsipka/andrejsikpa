@@ -1,0 +1,28 @@
+.heading {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--heading-color);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 16px;
+
+  &--huge {
+    font-size: 72px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 48px;
+    }
+  }
+  &--xlarge { font-size: 36px; }
+  &--large { font-size: 24px; }
+  &--medium { font-size: 20px; }
+}
+
+.text {
+  font-family: 'Work Sans', sans-serif;
+  color: var(--text-color);
+  line-height: 1.5;
+
+  &--large { font-size: 24px; }
+  &--medium { font-size: 20px; }
+  &--base { font-size: 16px; }
+}
