@@ -15,23 +15,27 @@ import { NgClass } from "@angular/common";
   ],
   template: `
     <header class="site-header">
-      <div class="site-header__top">
-        <div class="site-header__logo">
+      <div class="nav-bar-mobile">
+        <div class="nav-bar-mobile__logo-wrapper">
           <button type="button" class="burger-icon" (click)="toggleMenu()">
             <i class="material-symbols-outlined">menu</i>
           </button>
-          <a href="/" class="heading heading--medium">Andrej Sipka</a>
+          <a routerLink="/" class="logo">Andrej Sipka</a>
         </div>
-
         <app-theme-toggle></app-theme-toggle>
       </div>
 
-      <div class="site-header__navigation" [ngClass]="{'menu--hidden': !isOpen()}">
+      <div class="nav-bar">
+        <a routerLink="/" class="logo">Andrej Sipka</a>
+        <app-theme-toggle></app-theme-toggle>
+      </div>
+
+      <div class="nav-menu" [ngClass]="{'nav-menu--hidden': !isOpen()}">
         <button type="button" class="burger-icon" (click)="toggleMenu(false)">
           <i class="material-symbols-outlined">close</i>
         </button>
         <nav>
-          <ul>
+          <ul class="nav-menu__nav-list">
             <li>
               <a routerLink="/" class="button button__secondary" (click)="toggleMenu(false)">
                 Home
@@ -48,7 +52,7 @@ import { NgClass } from "@angular/common";
           </ul>
         </nav>
 
-        <div>
+        <div class="nav-menu__links">
           <a href="mailto:andrei.sipka@gmail.com" class="button button__secondary">Email</a>
           <a href="https://github.com/andrejsipka" target="_blank" class="button button__secondary">GitHub</a>
           <a href="https://linkedin.com/in/andrejsipka" target="_blank" class="button button__secondary">LinkedIn</a>
@@ -70,7 +74,86 @@ import { NgClass } from "@angular/common";
       }
     }
 
-    .burger-icon {
+    .site-header {
+      height: 100%;
+
+      @media screen and (min-width: 900px) {
+        padding-top: 100px;
+        padding-bottom: 72px;
+      }
+    }
+
+    .nav-bar-mobile {
+      height: 48px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @media screen and (min-width: 900px) {
+        display: none;
+      }
+
+      &__logo-wrapper {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .nav-bar {
+      height: 48px;
+      display: none;
+      margin-bottom: 16px;
+
+      @media screen and (min-width: 900px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .nav-menu {
+      @media screen and (max-width: 899px) {
+        position: fixed;
+        padding: 1rem;
+        background-color: var(--background);
+        width: 100%;
+        height: max-content;
+        top: 0;
+        left: 0;
+        z-index: 100;
+      }
+
+      &--hidden {
+        display: none;
+      }
+
+      @media screen and (min-width: 900px) {
+        height: calc(100% - 48px - 16px);
+        display: flex !important;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      &__nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        @media screen and (max-width: 899px) {
+          margin-bottom: 10px;
+        }
+      }
+
+      &__links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    .burger-icon,
+    .close-icon {
       color: var(--button-text-color);
       margin-right: 16px;
 
@@ -83,84 +166,7 @@ import { NgClass } from "@angular/common";
       }
     }
 
-    .close-icon {
-      color: var(--button-text-color);
-
-      @media screen and (min-width: 900px) {
-        display: none;
-      }
-
-      & > i {
-        font-size: 3rem;
-      }
-    }
-
-    .site-header {
-      height: 100%;
-
-      @media screen and (min-width: 900px) {
-        padding-top: 100px;
-        padding-bottom: 72px;
-      }
-
-      &__top {
-        height: 48px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-
-        & .heading {
-          margin-bottom: 0;
-          text-decoration: none;
-        }
-      }
-
-      &__logo {
-        display: flex;
-        align-items: center;
-      }
-
-      &__navigation {
-        @media screen and (max-width: 899px) {
-          position: fixed;
-          padding: 1rem;
-          background-color: var(--background);
-          width: 100%;
-          height: max-content;
-          top: 0;
-          left: 0;
-          z-index: 100;
-        }
-
-        @media screen and (min-width: 900px) {
-          height: calc(100% - 48px - 16px);
-          display: flex !important;
-          flex-direction: column;
-          justify-content: space-between;
-        }
-
-        & nav ul {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-
-          @media screen and (max-width: 899px) {
-            margin-bottom: 10px;
-          }
-        }
-
-        & div {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-      }
-    }
-
-    .menu--hidden {
-      display: none;
-    }
+    .burger-icon { margin-right: 16px; }
   `
 })
 export default class NavMenuComponent {

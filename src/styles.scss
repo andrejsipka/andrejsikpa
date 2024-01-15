@@ -9,7 +9,7 @@
   --heading-color: #F8F8F8;
   --text-color: #CCC5B9;
 
-  --button-background: #222222;
+  --button-background-color: #222222;
   --button-hover-color: hsl(0, 0%, 17%);
   --button-focus-color: hsl(0, 0%, 25%);
   --button-active-color: hsl(0, 0%, 35%);
@@ -132,12 +132,4 @@ body {
   align-items: center;
   min-height: 100vh;
   background-color: var(--background);
-}
-
-.page {
-  display: grid;
-
-  &__container {
-
-  }
 }
