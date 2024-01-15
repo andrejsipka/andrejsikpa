@@ -53,9 +53,9 @@ import { NgClass } from "@angular/common";
         </nav>
 
         <div class="nav-menu__links">
-          <a href="mailto:andrei.sipka@gmail.com" class="button button__secondary">Email</a>
-          <a href="https://github.com/andrejsipka" target="_blank" class="button button__secondary">GitHub</a>
-          <a href="https://linkedin.com/in/andrejsipka" target="_blank" class="button button__secondary">LinkedIn</a>
+          <a href="mailto:andrei.sipka@gmail.com" class="link">Email</a>
+          <a href="https://github.com/andrejsipka" target="_blank" class="link">GitHub</a>
+          <a href="https://linkedin.com/in/andrejsipka" target="_blank" class="link">LinkedIn</a>
         </div>
       </div>
     </header>
@@ -124,15 +124,15 @@ import { NgClass } from "@angular/common";
         z-index: 100;
       }
 
-      &--hidden {
-        display: none;
-      }
-
       @media screen and (min-width: 900px) {
         height: calc(100% - 48px - 16px);
         display: flex !important;
         flex-direction: column;
         justify-content: space-between;
+      }
+
+      &--hidden {
+        display: none;
       }
 
       &__nav-list {
@@ -141,14 +141,15 @@ import { NgClass } from "@angular/common";
         gap: 10px;
 
         @media screen and (max-width: 899px) {
-          margin-bottom: 10px;
+          margin-bottom: 72px;
         }
       }
 
       &__links {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 1.6rem;
+        margin-left: 1.6rem;
       }
     }
 
