@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import NavMenuComponent from './components/nav-menu/nav-menu.component';
+import NavigationService from './shared/navigation.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    RouterLink,
     NavMenuComponent
   ],
   template: `
     <div class="layout">
       <app-nav-menu></app-nav-menu>
-      <main class="content">
-        <router-outlet></router-outlet>
-      </main>
+
+      <div class="content">
+        <main>
+          <router-outlet></router-outlet>
+        </main>
+        <footer>
+          Footer
+        </footer>
+      </div>
     </div>
+
+    @if(isOpen()) {
+      <div class="overlay"></div>
+    }
   `,
   styles: `
     :host {
@@ -29,9 +39,7 @@ import NavMenuComponent from './components/nav-menu/nav-menu.component';
     .layout {
       display: flex;
       flex-direction: column;
-      gap: 16px;
       height: 100%;
-      padding: 0 1rem;
 
       @media screen and (min-width: 900px) {
         flex-direction: row;
@@ -40,11 +48,25 @@ import NavMenuComponent from './components/nav-menu/nav-menu.component';
 
     .content {
       flex-grow: 1;
+    }
+
+    .overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: var(--overlay);
+      z-index: 99;
 
       @media screen and (min-width: 900px) {
-        padding-top: 100px;
+        display: none;
       }
     }
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  private navigationService = inject(NavigationService);
+
+  readonly isOpen = this.navigationService.isOpen;
+}
