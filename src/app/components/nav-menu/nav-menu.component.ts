@@ -21,8 +21,8 @@ type NavLinks = {
   ],
   template: `
     <header class="header">
-      <div class="header__bar">
-        <button type="button" class="header__menu-button" (click)="openMenu()" [ngStyle]="{'position': isOpen() ? 'fixed' : 'absolute'}">
+      <div class="header__bar" [ngStyle]="{'position': isOpen() ? 'fixed' : 'absolute'}">
+        <button type="button" class="header__menu-button" (click)="openMenu()">
           <i class="material-symbols-outlined">{{isOpen() ? 'close' : 'menu'}}</i>
         </button>
 
@@ -34,7 +34,7 @@ type NavLinks = {
       <nav class="header__nav header__nav--hidden" [ngClass]="{'header__nav--hidden': !isOpen()}">
         <ul class="header__nav-list">
           @for(item of navLinks; track item.label) {
-            <li>
+            <li (click)="closeMenu()">
               <a [routerLink]="item.path" class="button button__secondary">
                 {{item.label}}
                 <i class="material-symbols-outlined">arrow_forward</i>
@@ -61,9 +61,14 @@ type NavLinks = {
     .header {
       padding: 0 1.6rem;
       position: relative;
+      height: max-content;
+
+      @media screen and (min-width: 900px) {
+        padding-top: 100px;
+      }
+
 
       &__bar {
-        position: relative;
         padding: 0 1.6rem;
         display: flex;
         justify-content: space-between;
@@ -76,6 +81,10 @@ type NavLinks = {
           z-index: 101;
           top: 0;
           left: 0;
+        }
+
+        @media screen and (min-width: 900px) {
+          position: relative !important;
         }
       }
 

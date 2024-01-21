@@ -6,7 +6,8 @@ type Project = {
   id: number,
   title: string,
   description: string,
-  link: string
+  link: string,
+  src: string
 }
 
 @Component({
@@ -17,10 +18,10 @@ type Project = {
   ],
   template: `
     <div class="page-layout">
-      <section class="hero">
+      <section>
         <article>
           <h1 class="heading heading--huge">Hello! I’m Andrej, Frontend Developer</h1>
-          <p class="text text--large u-margin-bottom--large">I’m building scaleable web applications. Besides that I’m continuously working on my skills and with curiosity exploring new technologies and approaches.</p>
+          <p class="text text--large u-margin-bottom--large">I’m building scaleable, modern web applications with Angular, TypeScript. I’m continuously working on my skills and with curiosity exploring new technologies and approaches.</p>
           <div>
             <a routerLink="/about" class="button button--max-width button__primary">
               About
@@ -41,10 +42,6 @@ type Project = {
     </div>
   `,
   styles: `
-    section {
-      padding: 0 16px;
-    }
-
     section:not(:last-child) {
       margin-bottom: 200px;
     }
@@ -72,8 +69,8 @@ export default class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.projects.set([
-      { id: 1, title: 'Henkai architekti', description: 'Portfolio website for architects to showcase their projects', link: 'https://henkai.cz' },
-      { id: 2, title: 'Andrej Sipka', description: 'Personal portfolio to promote myself with just one link', link: '' }
+      { id: 1, title: 'Henkai architekti', description: 'Portfolio website for architects to showcase their projects', link: 'https://henkai.cz', src: '/henkai.png' },
+      { id: 2, title: 'Andrej Sipka', description: 'Personal portfolio to promote myself with just one link', link: 'https://github.com/andrejsipka/andrejsipka', src: '/sipka.png' }
     ]);
   }
 }

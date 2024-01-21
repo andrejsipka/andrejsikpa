@@ -2,13 +2,15 @@ import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import NavMenuComponent from './components/nav-menu/nav-menu.component';
 import NavigationService from './shared/navigation.service';
+import FooterComponent from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
-    NavMenuComponent
+    NavMenuComponent,
+    FooterComponent
   ],
   template: `
     <div class="layout">
@@ -18,9 +20,7 @@ import NavigationService from './shared/navigation.service';
         <main>
           <router-outlet></router-outlet>
         </main>
-        <footer>
-          Footer
-        </footer>
+        <app-footer></app-footer>
       </div>
     </div>
 
@@ -47,6 +47,10 @@ import NavigationService from './shared/navigation.service';
     }
 
     .content {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       flex-grow: 1;
     }
 
